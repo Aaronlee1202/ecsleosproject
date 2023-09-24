@@ -1,7 +1,7 @@
 <script setup>
 import { onMounted, ref } from 'vue';
 import lottie from 'lottie-web';
-import Planet from '../common/planetModule.vue';
+import Planet from '../common/PlanetModule.vue';
 import jsonDataHover from '@/assets/icon/menu-icon-hover.json';
 
 const anLottieHover = ref();
