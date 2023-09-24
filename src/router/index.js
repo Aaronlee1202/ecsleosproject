@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import PrologueView from '../views/PrologueView.vue';
-import DemoView from '../components/common/planetModule.vue';
+import DemoView from '../components/common/PlanetModule.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
