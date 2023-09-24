@@ -2,7 +2,7 @@
 import { onMounted, ref } from 'vue';
 import lottie from 'lottie-web';
 import { RouterLink } from 'vue-router';
-import Text from './textAnimation.vue';
+import Text from './TextAnimation.vue';
 import jsonDataClick from '@/assets/icon/menu-icon-click.json';
 import jsonDataHover from '@/assets/icon/menu-icon-hover.json';
 
