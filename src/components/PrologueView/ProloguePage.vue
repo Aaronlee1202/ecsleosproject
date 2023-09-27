@@ -58,23 +58,19 @@ const animationIcon = () => {
   z-index: -999;
 }
 #content {
+  position: relative;
   padding: 110px 0 0 0;
 }
 h1 {
   height: 90px;
-  font-size: 40px;
-  font-family: 'Orbitron', sans-serif;
-  font-weight: 700;
-  color: #ff6b00;
+  color: var(--color-special-mark);
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 h2 {
-  font-size: 26px;
-  font-family: 'Inter', sans-serif;
-  font-weight: 700;
   text-align: center;
-  letter-spacing: 2.6px;
+  line-height: 32px;
 }
 .discover-icon-box {
   position: relative;
@@ -83,6 +79,7 @@ h2 {
   justify-content: center;
   align-items: center;
   .icon-box {
+    position: relative;
     width: 40px;
     height: 40px;
     cursor: pointer;
@@ -97,16 +94,18 @@ h2 {
     .discover-icon-hover {
       position: absolute;
     }
-  }
-  &:hover {
-    &::after {
-      content: 'Discover';
-      position: absolute;
-      top: 50px;
-      font-size: 16px;
-      font-family: 'Orbitron', sans-serif;
-      font-weight: 700;
-      line-height: 16.5px;
+    &:hover {
+      &::after {
+        content: 'Discover';
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 10px;
+        font-size: 14px;
+        font-family: 'Orbitron', sans-serif;
+        font-weight: 400;
+        line-height: 16.5px;
+      }
     }
   }
 }

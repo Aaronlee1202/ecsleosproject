@@ -51,15 +51,7 @@ onMounted(() => {
 
 <style scoped>
 #svgContainer {
-  /* width: 10%;
-  height: 15%; */
   background-color: #dcdcdc00;
-  /* position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  margin: auto; */
   cursor: pointer;
 }
 </style>

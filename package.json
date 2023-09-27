@@ -11,7 +11,6 @@
   },
   "dependencies": {
     "animate.css": "^4.1.1",
-    "bootstrap": "^5.3.2",
     "lottie-web": "^5.12.2",
     "sass-loader": "^13.3.2",
     "three": "^0.156.0",

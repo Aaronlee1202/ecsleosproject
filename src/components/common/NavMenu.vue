@@ -83,15 +83,16 @@ const animationIcon = () => {
 </script>
 
 <template>
+  <div :class="{ 'background-linear': show }"></div>
   <nav id="navigation" class="container-fluid" role="navigation">
-    <div class="row align-items-center justify-content-between">
+    <div class="row align-items-center justify-content-between custom-row">
       <div class="col-6">
         <img id="leo-logo" src="@/assets/icon/LEO-Logo.svg" alt="" />
       </div>
       <div class="col-6">
         <div id="menu-toggle">
           <div id="menu-icon-box">
-            <div class="menu-icon-text" :class="mapAnimate" :style="mapShow">MAP</div>
+            <div class="menu-icon-text" :class="mapAnimate" :style="mapShow">Map</div>
             <div class="menu-icon">
               <div id="menu-icon-click"></div>
               <div id="menu-icon-hover"></div>
@@ -103,8 +104,8 @@ const animationIcon = () => {
                 <Text propsText="CUBESAT" />
               </RouterLink>
               <div class="hover-text-box">
-                <p class="hover-text">SUBJECT</p>
-                <p>01</p>
+                <div class="hover-text">SUBJECT</div>
+                <div>01</div>
               </div>
             </li>
             <li>
@@ -112,8 +113,8 @@ const animationIcon = () => {
                 <Text propsText="ABOUT PROJECT" />
               </RouterLink>
               <div class="hover-text-box" style="right: 84%">
-                <p class="hover-text">SUBJECT</p>
-                <p>02</p>
+                <div class="hover-text">SUBJECT</div>
+                <div>02</div>
               </div>
             </li>
             <li>
@@ -121,8 +122,8 @@ const animationIcon = () => {
                 <Text propsText="ECS-PRODUCT" />
               </RouterLink>
               <div class="hover-text-box" style="right: 72%">
-                <p class="hover-text">SUBJECT</p>
-                <p>03</p>
+                <div class="hover-text">SUBJECT</div>
+                <div>03</div>
               </div>
             </li>
             <li>
@@ -130,8 +131,8 @@ const animationIcon = () => {
                 <Text propsText="LEO-APPLICATION" />
               </RouterLink>
               <div class="hover-text-box" style="right: 89%">
-                <p class="hover-text">SUBJECT</p>
-                <p>04</p>
+                <div class="hover-text">SUBJECT</div>
+                <div>04</div>
               </div>
             </li>
           </ul>
@@ -144,9 +145,20 @@ const animationIcon = () => {
 <style lang="scss" scoped>
 #navigation {
   position: fixed;
-  margin: 40px 0 0 0;
+  padding: 50px 0 0 0;
+  z-index: 999;
+}
+.custom-row {
   padding: 0 50px 0 50px;
-  background-color: #00000000;
+}
+.background-linear {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(0, 0, 0, 1) 70%);
+  z-index: 998;
 }
 #leo-logo {
   cursor: pointer;
@@ -155,6 +167,7 @@ const animationIcon = () => {
   position: relative;
   -webkit-user-select: none;
   user-select: none;
+  z-index: 999;
   a {
     text-decoration: none;
   }
@@ -164,7 +177,7 @@ const animationIcon = () => {
   float: right; //靠右對齊
   .menu-icon-text {
     font-family: 'Orbitron', sans-serif;
-    font-weight: 700;
+    font-weight: 300;
     font-size: 14px;
     color: #ffffff;
     margin-right: 10px;
@@ -215,27 +228,29 @@ const animationIcon = () => {
     // 垂直置中
     display: flex;
     align-items: center;
+    cursor: pointer;
 
     // hover後左邊小垃圾
     .hover-text-box {
       display: inline;
       width: 90px;
+      padding: 0 0 25px 0;
+      font-size: 12px;
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
       opacity: 0; // hover前隱藏
     }
     &:hover {
       .hover-text-box {
         display: inline;
         margin: 10px 0 0 0;
+        font-size: 12px;
         font-family: 'Inter', sans-serif;
         font-weight: 300;
-        font-size: 12px;
         color: #ffffff;
         text-align: left;
         opacity: 1; // hover出現
         transition: opacity 0.6s;
-        p {
-          line-height: 5px;
-        }
       }
       //白色方塊
       .hover-text::before {

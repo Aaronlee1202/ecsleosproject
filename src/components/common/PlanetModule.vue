@@ -1,6 +1,7 @@
 <script setup>
 import { onMounted, ref, onUnmounted } from 'vue';
 import {
+  Clock,
   IcosahedronGeometry,
   MeshStandardMaterial,
   Scene,
@@ -9,64 +10,48 @@ import {
   WebGLRenderer,
   SpotLight
 } from 'three';
-import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
-import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
-import { BokehPass } from 'three/addons/postprocessing/BokehPass.js';
+// import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
+// import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
+// import { BokehPass } from 'three/addons/postprocessing/BokehPass.js';
 
-let scene, sphere, camera, composer, renderer, spotLight;
+let scene, clock, sphere, camera, spotLight;
+const renderer = ref();
 const mapModule = ref();
 
 onMounted(() => {
-  initModule();
-  render();
-  animate();
+  initScene();
 });
 onUnmounted(() => {
   console.log('onUnmounted');
-
-  // model01.traverse((obj) => {
-  //   if (obj.type == 'Mesh') {
-  //     obj.geometry.dispose();
-  //     obj.material.dispose();
-  //   }
-  // });
-  // model02.traverse((obj) => {
-  //   if (obj.type == 'Mesh') {
-  //     obj.geometry.dispose();
-  //     obj.material.dispose();
-  //   }
-  // });
-
-  // scene.remove(model01, model02);
-
-  // //  renderer.dispose();
-  // renderer.renderLists.dispose();
+  sphere.traverse((obj) => {
+    if (obj.type == 'Mesh') {
+      obj.geometry.dispose();
+      obj.material.dispose();
+    }
+  });
+  scene.remove(sphere);
+  renderer.value.dispose();
+  renderer.value.renderLists.dispose();
 });
 
-//掛載到Ref上
-function render() {
-  try {
-    //建立渲染器
-    renderer = new WebGLRenderer({ antialias: true, alpha: true });
-    renderer.setPixelRatio(window.devicePixelRatio);
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.toneMappingExposure = 0.01;
-    mapModule.value.appendChild(renderer.domElement);
-  } catch {
-    console.error('render Error');
-  }
-}
-
-function initModule() {
+function initScene() {
+  console.log('init');
   //建立場景
   scene = new Scene();
+  clock = new Clock();
+
   //建立視角
   camera = new PerspectiveCamera(40, window.innerWidth / window.innerHeight, 4, 2000000);
+  camera.position.set(0, 50, 250);
+
   //建立渲染器
-  renderer = new WebGLRenderer({ antialias: true });
-  camera.position.x = 0;
-  camera.position.y = 50;
-  camera.position.z = 250;
+  renderer.value = new WebGLRenderer({ antialias: true, alpha: true });
+  renderer.value.setPixelRatio(window.devicePixelRatio);
+  renderer.value.setSize(window.innerWidth, window.innerHeight);
+  renderer.value.toneMappingExposure = 0.01;
+  //掛載到Ref上
+  mapModule.value.appendChild(renderer.value.domElement);
+
   //建立球體
   const geometry = new IcosahedronGeometry(100, 24);
   const material = new MeshStandardMaterial({ wireframe: true });
@@ -75,19 +60,10 @@ function initModule() {
 
   initSpotLight();
 
-  renderer.setSize(window.innerWidth, window.innerHeight);
-
   // 畫面大小監聽
   window.addEventListener('resize', onWindowResize);
-  composer = new EffectComposer(renderer);
-  const renderPass = new RenderPass(scene, camera);
-  composer.addPass(renderPass);
-  const bokehPass = new BokehPass(scene, camera, {
-    focus: 1.0, // 焦点深度，可以根据需要调整
-    aperture: 0.025, // 光圈大小，可以根据需要调整
-    maxblur: 0.002 // 最大模糊程度
-  });
-  composer.addPass(bokehPass);
+
+  animate();
 }
 
 // 自適應視窗大小
@@ -97,7 +73,7 @@ function onWindowResize() {
   // 更新相機投影矩陣
   camera.updateProjectionMatrix();
   // 重新設置重新設置渲染器渲染範圍
-  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.value.setSize(window.innerWidth, window.innerHeight);
 }
 
 function initSpotLight() {
@@ -115,14 +91,12 @@ function initSpotLight() {
 }
 
 function animate() {
-  renderer.render(scene, camera);
-  composer.render();
   requestAnimationFrame(animate);
+  clock.getDelta();
+  renderer.value.render(scene, camera);
 }
 </script>
 
 <template>
   <div ref="mapModule" />
 </template>
-
-<style scoped></style>

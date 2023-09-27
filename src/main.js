@@ -1,8 +1,8 @@
-// import './assets/main.css'
+import './styles/main.css'
+import './SCSS/bootstrap-grid.min.css'; //只引入bootstrap grid
 
 import { createApp } from 'vue'
 import 'animate.css';
-import './SCSS/custom.css';
 
 import App from './App.vue'
 import router from './router'

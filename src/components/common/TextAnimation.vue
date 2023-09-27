@@ -8,7 +8,7 @@ onMounted(() => {
   messageText.value = props.propsText;
 });
 
-const codeletters = ref('ABCDEFGHIJKLMNOPQRSTUVWXYZ');
+const codeletters = ref('ABCDJKLMNOPWXYZ'); //ABCDEFGHIJKLMNOPQRSTUVWXYZ
 const message = ref(0);
 const currentLength = ref(0);
 const fadeBuffer = ref(false);
@@ -42,7 +42,7 @@ const animateFadeBuffer = () => {
     fadeBuffer.value = [];
     for (let i = 0; i < messages.value[message.value].length; i++) {
       fadeBuffer.value.push({
-        c: Math.floor(Math.random() * 12) + 1,
+        c: Math.floor(Math.random() * 8) + 1,
         l: messages.value[message.value].charAt(i)
       });
     }
@@ -79,14 +79,14 @@ const cycleText = () => {
   // setTimeout(animateIn, 200); //無限loop
 };
 
-const init = (msg) => {
-  messages.value = [msg];
+const init = () => {
+  messages.value = [props.propsText];
   animateIn();
 };
 </script>
 
 <template>
-  <div id="messenger" @mouseover="init(props.propsText)">
+  <div id="messenger" @mouseover="init()">
     <a>
       {{ messageText }}
     </a>
