@@ -1,6 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import PrologueView from '../views/PrologueView.vue';
-import DemoView from '../components/common/PlanetModule.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -17,7 +16,7 @@ const router = createRouter({
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
       //  component: () => import('../views/DemoView.vue')
-      component: DemoView
+      component: PrologueView
     }
   ]
 });
