@@ -94,6 +94,8 @@ const clickedPlayerButton = () => {
       <img id="circle" src="@/assets/intro/circle.svg" />
       <div class="distance-content-block">
         <div class="distance-info">{{ distanceInfo[slideIndex] }}</div>
+        <!-- <div class="distance-info"><Text :propsText="distanceInfo[slideIndex]" /></div> -->
+        
         <img src="@/assets/intro/down_arrow.svg" alt="" />
       </div>
     </div>
@@ -210,6 +212,7 @@ const clickedPlayerButton = () => {
     display: flex;
     margin-left: -100px;
     h1 {
+      color: #ffffff;
       width: 98px;
       justify-content: left;
     }
