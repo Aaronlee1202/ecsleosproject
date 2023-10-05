@@ -1,35 +1,73 @@
 <script setup>
-import { ref } from 'vue';
-import cardBackground from '../common/svgComponents/card_background.vue';
-import leo from '../../assets/intro/leo.svg';
+import { ref, reactive } from 'vue';
+import LEOIntroCard from '../common/svgComponents/LEOIntroCard.vue';
+import MEOIntroCard from '../common/svgComponents/MEOIntroCard.vue';
+import HEOIntroCard from '../common/svgComponents/HEOIntroCard.vue';
+import leo from '@/assets/intro/leo.svg';
+import meo from '@/assets/intro/meo.svg';
+import heo from '@/assets/intro/heo.svg';
 
-const leoImg = ref(leo);
+const props = defineProps({
+  slideIndex: {
+    type: Number,
+    default: 0
+  }
+});
+const leoImg = ref([leo, meo, heo]);
+const satelliteIntro = reactive([
+  {
+    title: '低軌衛星',
+    subtitle: '對地觀測 | 寬頻應用 | 物連網 | 通訊',
+    orbitalPeriod: '約90-120分鐘',
+    speed: '快 (7.8-8公里/秒)',
+    delay: '低 (20公尺/秒)',
+    density: '高 (星系至少上百顆)'
+  },
+  {
+    title: '中軌衛星',
+    subtitle: '氣象觀測 | 衛星電視 | 衛星電話',
+    orbitalPeriod: '約12小時',
+    speed: '中 (3.07-3.87公里/秒)',
+    delay: '中 (100公尺/秒)',
+    density: '中 (約6顆可覆蓋全球)'
+  },
+  {
+    title: '高軌衛星',
+    subtitle: '衛星定位 | 導航 | 通信',
+    orbitalPeriod: '24小時',
+    speed: '慢 (3.07公里/秒)',
+    delay: '高 (250公尺/秒)',
+    density: '低 (3顆可覆蓋全球)'
+  },
+]);
 </script>
 <template>
   <div id="intro-card">
-    <cardBackground class="svg-data" />
+    <LEOIntroCard v-show="props.slideIndex == 0" />
+    <MEOIntroCard v-show="props.slideIndex == 1" />
+    <HEOIntroCard v-show="props.slideIndex == 2" />
     <div class="intro container">
       <div class="row custom-row">
         <div class="col">
-          <div class="leo-name">低軌衛星</div>
+          <div class="leo-name">{{satelliteIntro[props.slideIndex].title}}</div>
         </div>
       </div>
       <div class="row custom-row">
         <div class="col">
           <span class="leo-subtitle">
-            對地觀測 &ensp;| &ensp;寬頻應用 &ensp;| &ensp;物連網 &ensp;| &ensp;通訊
+            {{ satelliteIntro[props.slideIndex].subtitle }}
           </span>
         </div>
       </div>
       <div class="row custom-row">
         <div class="col">
-          <img class="leo-img" :src="leoImg" alt="leo" />
+          <img class="leo-img" :src="leoImg[props.slideIndex]" alt="leo" />
         </div>
       </div>
       <div class="leo-info-box">
         <div class="leo-info-list">
           <div class="info-title">軌道週期:</div>
-          <span>約90-120分鐘</span>
+          <span>{{ satelliteIntro[props.slideIndex].orbitalPeriod }}</span>
         </div>
         <div class="rank-value-img">
           <svg width="205" height="6" viewBox="0 0 205 6" fill="none">
@@ -58,7 +96,7 @@ const leoImg = ref(leo);
       <div class="leo-info-box">
         <div class="leo-info-list">
           <div class="info-title">速度:</div>
-          <span>快 (7.8-8公里/秒)</span>
+          <span>{{ satelliteIntro[props.slideIndex].speed }}</span>
         </div>
         <div class="rank-value-img">
           <svg width="205" height="6" viewBox="0 0 205 6" fill="none">
@@ -87,7 +125,7 @@ const leoImg = ref(leo);
       <div class="leo-info-box">
         <div class="leo-info-list">
           <div class="info-title">延遲度:</div>
-          <span>低 (20公尺/秒)</span>
+          <span>{{ satelliteIntro[props.slideIndex].delay }}</span>
         </div>
         <div class="rank-value-img">
           <svg width="205" height="6" viewBox="0 0 205 6" fill="none">
@@ -116,7 +154,7 @@ const leoImg = ref(leo);
       <div class="leo-info-box">
         <div class="leo-info-list">
           <div class="info-title">覆蓋密度:</div>
-          <span>高 (星系至少上百顆)</span>
+          <span>{{ satelliteIntro[props.slideIndex].density }}</span>
         </div>
         <div class="rank-value-img">
           <svg width="205" height="6" viewBox="0 0 205 6" fill="none">
@@ -149,11 +187,6 @@ const leoImg = ref(leo);
 <style lang="scss" scoped>
 #intro-card {
   position: relative;
-  top: 25%;
-  right: 30%;
-}
-.svg-data {
-  position: absolute;
 }
 .intro {
   position: absolute;

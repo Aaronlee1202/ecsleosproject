@@ -1,7 +1,8 @@
 <script setup>
 import Planet from '../components/PrologueView/PlanetModule.vue';
 import LEOIntroCard from '../components/PrologueView/LEOIntroCard.vue';
-import { onMounted, ref } from 'vue';
+import SubjectButton from '../components/PrologueView/SubjectButton.vue';
+import { onMounted, ref, onUnmounted } from 'vue';
 import lottie from 'lottie-web';
 import jsonDataHover from '@/assets/icon/menu-icon-hover.json';
 
@@ -12,11 +13,25 @@ const fadeInDown = 'animate__animated animate__fadeInDown';
 const fadeOutLeft = 'animate__animated animate__fadeOutLeft';
 const anLottieHover = ref(null);
 const planetMoveEffectSwitch = ref(true);
+const subjectButton = ref(false);
+const slideIndex = ref(0);
+const satelliteName = ['LEO', 'MEO', 'HEO'];
+const distanceInfo = ['離地 300-1500km', '離地 2000-30000km', '離地大於36000km'];
+
+const plusDivs = () => {
+  if (slideIndex.value < 2) slideIndex.value++;
+};
+const minusDivs = () => {
+  if (slideIndex.value > 0) slideIndex.value--;
+};
 
 onMounted(() => {
   animationIcon();
 });
-
+onUnmounted(() => {
+  anLottieHover.value.destroy();
+});
+//載入player Icon
 const animationIcon = () => {
   const svgContainerHover = document.getElementById('discover-icon-hover');
 
@@ -46,6 +61,7 @@ const animationIcon = () => {
   }
 };
 
+//按下player後轉場動畫
 const clickedPlayerButton = () => {
   if (planetMoveEffectSwitch.value) {
     fadeAnimate.value = fadeOutLeft;
@@ -57,6 +73,7 @@ const clickedPlayerButton = () => {
           //移除anLottieHover的svg圖片
           anLottieHover.value = null;
           planetMoveEffectSwitch.value = false;
+          subjectButton.value = true;
         }, 200);
       }, 200);
     }, 200);
@@ -66,8 +83,40 @@ const clickedPlayerButton = () => {
 
 <template>
   <div class="prologue-page">
-    <Planet id="planet-background" :planetMoveEffectSwitch="planetMoveEffectSwitch" />
-    <div id="content">
+    <!-- 球體 -->
+    <Planet
+      id="planet-background"
+      :planetMoveEffectSwitch="planetMoveEffectSwitch"
+      :slideIndex="slideIndex"
+    />
+    <!-- 圓圈 -->
+    <div class="circle-box" v-show="!planetMoveEffectSwitch">
+      <img id="circle" src="@/assets/intro/circle.svg" />
+      <div class="distance-content-block">
+        <div class="distance-info">{{ distanceInfo[slideIndex] }}</div>
+        <img src="@/assets/intro/down_arrow.svg" alt="" />
+      </div>
+    </div>
+    <!-- 按鈕操作 -->
+    <div class="action-button-block" v-show="!planetMoveEffectSwitch">
+      <div class="action-button">
+        <img
+          src="@/assets/intro/left_btn.svg"
+          alt="Left"
+          @click="plusDivs()"
+          :style="slideIndex != 2 ? '' : 'opacity:0'"
+        />
+        <h1>{{ satelliteName[slideIndex] }}</h1>
+        <img
+          src="@/assets/intro/right_btn.svg"
+          alt="Right"
+          @click="minusDivs()"
+          :style="slideIndex != 0 ? '' : 'opacity:0'"
+        />
+      </div>
+    </div>
+    <!-- 開場白 -->
+    <div id="content" v-if="planetMoveEffectSwitch">
       <h1 class="animate__animated animate__fadeInDown" :class="fadeAnimate">
         LOW EARTH ORBIT SATELLITE
       </h1>
@@ -84,24 +133,128 @@ const clickedPlayerButton = () => {
         </div>
       </div>
     </div>
-    <LEOIntroCard id="intro-card" v-show="true" />
+    <!-- 跳轉按鈕 -->
+    <div class="subject-button-box" v-show="!planetMoveEffectSwitch && slideIndex == 0">
+      <SubjectButton
+        id="subject-button-CUBESAT"
+        subjectButton="CUBESAT"
+        pageName="CUBESAT"
+        v-show="subjectButton"
+      />
+      <SubjectButton
+        id="subject-button-ABOUT_PROJECT"
+        subjectButton="ABOUT_PROJECT"
+        pageName="About Project"
+        v-show="subjectButton"
+      />
+      <SubjectButton
+        id="subject-button-PRODUCT"
+        subjectButton="PRODUCT"
+        pageName="ECS Product"
+        v-show="subjectButton"
+      />
+      <SubjectButton
+        id="subject-button-APPLICATION"
+        subjectButton="APPLICATION"
+        pageName="Application"
+        v-show="subjectButton"
+      />
+    </div>
+    <!-- 衛星介紹卡片 -->
+    <LEOIntroCard id="intro-card" v-show="subjectButton" :slideIndex="slideIndex" />
   </div>
 </template>
 
-<style scoped>
-#planet-background {
-  position: absolute;
-  z-index: -999;
-}
-#intro-card {
-  position: absolute;
-}
+<style lang="scss" scoped>
 .prologue-page {
-  min-height: 100vh;
   width: 100%;
+  min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+#planet-background {
+  width: 100%;
+  position: absolute;
+  z-index: -999;
+}
+.circle-box {
+  position: absolute;
+  width: 45%;
+  display: flex;
+  #circle {
+    width: 100%;
+  }
+  .distance-content-block {
+    position: absolute;
+    bottom: 2%;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    .distance-info {
+      color: #bbb;
+      font-family: Orbitron;
+      font-size: 12px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 16.5px;
+    }
+  }
+}
+.action-button-block {
+  position: absolute;
+  width: 45%;
+  line-height: 16.5px;
+  letter-spacing: 3.6px;
+  .action-button {
+    display: flex;
+    margin-left: -100px;
+    h1 {
+      width: 98px;
+      justify-content: left;
+    }
+    img {
+      margin: 0 25px 0 25px;
+      cursor: pointer;
+    }
+  }
+}
+#intro-card {
+  position: absolute;
+  margin-bottom: 650px;
+  right: 410px;
+}
+.subject-button-box {
+  width: 60vw;
+  height: 50vh;
+}
+#subject-button-CUBESAT {
+  position: absolute;
+  display: inline-grid;
+  justify-items: center;
+  left: 40%;
+  top: 37%;
+}
+#subject-button-ABOUT_PROJECT {
+  position: absolute;
+  display: inline-grid;
+  justify-items: center;
+  left: 53%;
+  top: 27%;
+}
+#subject-button-PRODUCT {
+  position: absolute;
+  display: inline-grid;
+  justify-items: center;
+  left: 56%;
+  top: 53%;
+}
+#subject-button-APPLICATION {
+  position: absolute;
+  display: inline-grid;
+  justify-items: center;
+  left: 42%;
+  top: 60%;
 }
 
 #content {
