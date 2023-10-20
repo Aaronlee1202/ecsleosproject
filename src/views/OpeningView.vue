@@ -1,16 +1,20 @@
 <script setup>
-import Planet from '../components/PrologueView/PlanetModule.vue';
-import LEOIntroCard from '../components/PrologueView/LEOIntroCard.vue';
-import SubjectButton from '../components/PrologueView/SubjectButton.vue';
-import { onMounted, ref, onUnmounted } from 'vue';
-import lottie from 'lottie-web';
+import Planet from '../components/opening/PlanetModule.vue';
+import LEOIntroCard from '../components/opening/LEOIntroCard.vue';
+import SubjectButton from '../components/opening/SubjectButton.vue';
 import jsonDataHover from '@/assets/icon/menu-icon-hover.json';
+import PlayerIcon from '@/assets/icon/player.svg';
+import lottie from 'lottie-web';
+import { useRoute } from 'vue-router';
+import { onMounted, ref, onBeforeUnmount } from 'vue';
 
 const fadeAnimate = ref();
 const fadeAnimate2 = ref();
 const fadeAnimate3 = ref();
 const fadeInDown = 'animate__animated animate__fadeInDown';
 const fadeOutLeft = 'animate__animated animate__fadeOutLeft';
+const animateFadeIn = 'animate__animated animate__fadeIn';
+const playerIcon = ref();
 const anLottieHover = ref(null);
 const planetMoveEffectSwitch = ref(true);
 const subjectButton = ref(false);
@@ -25,15 +29,23 @@ const minusDivs = () => {
   if (slideIndex.value > 0) slideIndex.value--;
 };
 
+const route = useRoute();
+
 onMounted(() => {
-  animationIcon();
+  if (route.query.opening == 'false') {
+    planetMoveEffectSwitch.value = false;
+    subjectButton.value = true;
+  } else {
+    animationIcon();
+  }
 });
-onUnmounted(() => {
-  anLottieHover.value.destroy();
+onBeforeUnmount(() => {
+  // anLottieHover.value.destroy();
 });
 //載入player Icon
 const animationIcon = () => {
   const svgContainerHover = document.getElementById('discover-icon-hover');
+  playerIcon.value = PlayerIcon;
 
   anLottieHover.value = lottie.loadAnimation({
     container: svgContainerHover,
@@ -82,7 +94,7 @@ const clickedPlayerButton = () => {
 </script>
 
 <template>
-  <div class="prologue-page">
+  <div class="opening-page">
     <!-- 球體 -->
     <Planet
       id="planet-background"
@@ -95,7 +107,7 @@ const clickedPlayerButton = () => {
       <div class="distance-content-block">
         <div class="distance-info">{{ distanceInfo[slideIndex] }}</div>
         <!-- <div class="distance-info"><Text :propsText="distanceInfo[slideIndex]" /></div> -->
-        
+
         <img src="@/assets/intro/down_arrow.svg" alt="" />
       </div>
     </div>
@@ -129,34 +141,39 @@ const clickedPlayerButton = () => {
       <div class="discover-icon-box" :class="fadeAnimate3">
         <div class="icon-box">
           <div class="img-box">
-            <img src="@/assets/icon/player.svg" alt="" />
+            <img :src="playerIcon" alt="" />
           </div>
           <div id="discover-icon-hover" @click="clickedPlayerButton"></div>
         </div>
       </div>
     </div>
-    <!-- 跳轉按鈕 -->
-    <div class="subject-button-box" v-show="!planetMoveEffectSwitch && slideIndex == 0">
+    <!-- Page跳轉按鈕 -->
+    <div class="subject-button-box" v-if="!planetMoveEffectSwitch">
       <SubjectButton
         id="subject-button-CUBESAT"
+        :class="slideIndex != 0 ? fadeOutLeft : animateFadeIn"
         subjectButton="CUBESAT"
         pageName="CUBESAT"
         v-show="subjectButton"
-      />
+      >
+      </SubjectButton>
       <SubjectButton
         id="subject-button-ABOUT_PROJECT"
+        :class="slideIndex != 0 ? fadeOutLeft : animateFadeIn"
         subjectButton="ABOUT_PROJECT"
         pageName="About Project"
         v-show="subjectButton"
       />
       <SubjectButton
         id="subject-button-PRODUCT"
+        :class="slideIndex != 0 ? fadeOutLeft : animateFadeIn"
         subjectButton="PRODUCT"
         pageName="ECS Product"
         v-show="subjectButton"
       />
       <SubjectButton
         id="subject-button-APPLICATION"
+        :class="slideIndex != 0 ? fadeOutLeft : animateFadeIn"
         subjectButton="APPLICATION"
         pageName="Application"
         v-show="subjectButton"
@@ -168,7 +185,7 @@ const clickedPlayerButton = () => {
 </template>
 
 <style lang="scss" scoped>
-.prologue-page {
+.opening-page {
   width: 100%;
   min-height: 100vh;
   display: flex;

@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, ref, reactive, watch, onUnmounted } from 'vue';
+import { onMounted, ref, reactive, watch, onBeforeUnmount } from 'vue';
 import {
   Clock,
   IcosahedronGeometry,
@@ -14,7 +14,9 @@ import {
 let scene, clock, sphereMesh, camera, spotLight, targetX, targetY, clockTime;
 const meshShrinkSlowlyFirst = ref(true);
 const renderer = ref();
-const mapModule = ref();
+const geometry = ref();
+const detail = ref(28);
+const planetModule = ref();
 const sphereMeshScale_Buff = ref();
 const mouseMove = reactive({
   mouseX: 0,
@@ -39,9 +41,9 @@ const props = defineProps({
 
 watch(
   () => props.slideIndex,
-  (newIdx, oldIdx) => {
-    console.log('newIdx', newIdx);
-    console.log('oldIdx', oldIdx);
+  (newIdx) => {
+    // console.log('newIdx', newIdx);
+    // console.log('oldIdx', oldIdx);
     if (newIdx == 0) {
       sphereMesh.scale.set(
         sphereMeshScale_Buff.value,
@@ -62,9 +64,8 @@ watch(
 onMounted(() => {
   initScene();
 });
-//釋放效能
-onUnmounted(() => {
-  console.log('onUnmounted');
+//釋放空間
+onBeforeUnmount(() => {
   sphereMesh.traverse((obj) => {
     if (obj.type == 'Mesh') {
       obj.geometry.dispose();
@@ -95,9 +96,9 @@ function initScene() {
   renderer.value.toneMappingExposure = 0.01;
 
   //建立球體
-  const geometry = new IcosahedronGeometry(100, 18);
+  geometry.value = new IcosahedronGeometry(100, detail.value);
   const material = new MeshStandardMaterial({ wireframe: true });
-  sphereMesh = new Mesh(geometry, material);
+  sphereMesh = new Mesh(geometry.value, material);
   scene.add(sphereMesh);
 
   initSpotLight();
@@ -107,7 +108,7 @@ function initScene() {
   // 畫面大小監聽
   window.addEventListener('resize', onWindowResize);
   //掛載到Ref上
-  mapModule.value.appendChild(renderer.value.domElement);
+  planetModule.value.appendChild(renderer.value.domElement);
 
   animate();
 }
@@ -131,8 +132,8 @@ function onMouseMove(event) {
 }
 //滑鼠互動效果
 function mouseMoveEffect() {
-  targetX = mouseMove.mouseX * 0.0001;
-  targetY = mouseMove.mouseY * 0.0001;
+  targetX = mouseMove.mouseX * 0.0005;
+  targetY = mouseMove.mouseY * 0.0005;
   if (camera) {
     // camera.rotation.y += 0.003 * (targetX - camera.rotation.y);
     // camera.rotation.x += 0.003 * (targetY - camera.rotation.x);
@@ -228,6 +229,6 @@ function animate() {
 
 <template>
   <div>
-    <div ref="mapModule"></div>
+    <div ref="planetModule"></div>
   </div>
 </template>

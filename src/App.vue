@@ -7,16 +7,12 @@ import NavMenu from './components/common/NavMenu.vue';
   <header>
     <NavMenu />
   </header>
-  <RouterView id="main-page" />
+  <RouterView />
 </template>
 
 <style lang="scss">
 body {
-  background-image: url(./assets/images/bg.png);
+  background-image: url(@/assets/images/bg.png);
   background-size: 100%;
-}
-#main-page {
-  position: relative;
-  min-height: 100vh;
 }
 </style>

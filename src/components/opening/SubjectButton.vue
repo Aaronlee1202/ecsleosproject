@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, ref, onUnmounted } from 'vue';
+import { onMounted, ref, computed, onBeforeUnmount } from 'vue';
 import lottie from 'lottie-web';
 import subjectJsonData from '@/assets/intro/subject-hover.json';
 
@@ -8,7 +8,9 @@ const anLottieHover_Subject = ref(null);
 onMounted(() => {
   animationIcon();
 });
-onUnmounted(() => {
+onBeforeUnmount(() => {
+  // anLottieHover_Subject.value.window.removeEventListener('mouseover');
+  // anLottieHover_Subject.value.window.removeEventListener('mouseleave');
   anLottieHover_Subject.value.destroy();
 });
 
@@ -19,6 +21,16 @@ const props = defineProps({
   pageName: {
     type: String
   }
+});
+
+const routeTo = computed(() => {
+  let routeName = '';
+  switch (props.pageName) {
+    case 'CUBESAT':
+      routeName = '/cubesat';
+      break;
+  }
+  return routeName;
 });
 
 const animationIcon = () => {
@@ -46,32 +58,33 @@ const animationIcon = () => {
 
 <template>
   <div class="subject-button">
-    <div :id="`subJect-hover-${props.subjectButton}`"></div>
+    <RouterLink :to="routeTo">
+      <div :id="`subJect-hover-${props.subjectButton}`"></div>
+    </RouterLink>
     <div class="subJect-text">{{ props.pageName }}</div>
   </div>
 </template>
 
 <style lang="scss" scoped>
 .subject-button {
+  cursor: pointer;
+}
+.subject-button {
   #subJect-hover-CUBESAT {
     width: 35px;
     margin-bottom: 10px;
-    cursor: pointer;
   }
   #subJect-hover-ABOUT_PROJECT {
     width: 35px;
     margin-bottom: 10px;
-    cursor: pointer;
   }
   #subJect-hover-PRODUCT {
     width: 35px;
     margin-bottom: 10px;
-    cursor: pointer;
   }
   #subJect-hover-APPLICATION {
     width: 35px;
     margin-bottom: 10px;
-    cursor: pointer;
   }
   .subJect-text {
     font-size: 14px;

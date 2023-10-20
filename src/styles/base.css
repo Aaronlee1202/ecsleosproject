@@ -17,9 +17,10 @@
   --color-hover-after: var(--main-gray-2);
   --color-hover-before: var(--main-white);
 
+  --text-font-size: 16px;
+  --text-font-size-small: 14px;
   --text-letter-spacing: 2.6px;
 }
-
 body {
   width: 100%;
   min-height: 100vh;
@@ -28,36 +29,61 @@ body {
   color: var(--color-font);
   background: var(--color-background);
   transition:
-    color 0.5s,
-    background-color 0.5s;
-  /* letter-spacing: 2.6px;
-  line-height: 32px; */
+    color 0.3s,
+    background-color 0.3s;
   font-family: 'Inter', 'Roboto', sans-serif;
-  font-size: 20px;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-h1 {
-  font-size: 36px;
-  font-family: 'Orbitron', sans-serif;
-  font-weight: 700;
-  letter-spacing: var(--text-letter-spacing);
+/* 13吋筆電以上 */
+@media (min-width: 1440px) {
+  h1 {
+    font-size: 2.25rem; /* 36px */
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 700;
+    letter-spacing: var(--text-letter-spacing);
+  }
+  h2 {
+    font-size: 1.625rem; /* 26px */
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    letter-spacing: var(--text-letter-spacing);
+  }
+  p {
+    font-size: 1.25rem; /* 20px */
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+  }
+  span {
+    font-size: 0.875rem; /* 14px */
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+  }
 }
-h2 {
-  font-size: 26px;
-  font-family: 'Inter', sans-serif;
-  font-weight: 500;
-  letter-spacing: var(--text-letter-spacing);
-}
-p {
-  font-size: 20px;
-  font-family: 'Inter', sans-serif;
-  font-weight: 500;
-}
-span {
-  font-size: 14px;
-  font-family: 'Inter', sans-serif;
-  font-weight: 300;
+/* 平板 */
+@media (max-width: 1440px) {
+  h1 {
+    font-size: 2.286rem; /* 32px */
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 700;
+    letter-spacing: var(--text-letter-spacing);
+  }
+  h2 {
+    font-size: 1.571rem; /* 22px */
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    letter-spacing: var(--text-letter-spacing);
+  }
+  p {
+    font-size: 1.143rem; /* 16px */
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+  }
+  span {
+    font-size: 0.714rem; /* 10px */
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+  }
 }

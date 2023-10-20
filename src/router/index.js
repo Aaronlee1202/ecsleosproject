@@ -1,22 +1,23 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import PrologueView from '../views/PrologueView.vue';
+import OpeningView from '../views/OpeningView.vue';
+import CubesatView from '../views/CubesatView.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: '/',
-      name: 'prologue',
-      component: PrologueView
+      name: 'opening',
+      component: OpeningView
     },
     {
-      path: '/demo',
-      name: 'demo',
+      path: '/cubesat',
+      name: 'cubesat',
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
       //  component: () => import('../views/DemoView.vue')
-      component: PrologueView
+      component: CubesatView
     }
   ]
 });

@@ -310,18 +310,18 @@ span {
 }
 .rank-value-show-02 {
   opacity: 1;
-  transition: all 0.1s;
+  transition: all 0.2s;
 }
 .rank-value-show-03 {
   opacity: 1;
-  transition: all 0.7s;
+  transition: all 0.2s;
 }
 .rank-value-show-2 {
-  opacity: 0.1;
-  transition: all 0.7s;
+  opacity: 0;
+  transition: all 0.2s;
 }
 .rank-value-show-3 {
-  opacity: 0.1;
-  transition: all 0.1s;
+  opacity: 0;
+  transition: all 0.2s;
 }
 </style>
