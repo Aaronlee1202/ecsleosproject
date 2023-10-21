@@ -11,7 +11,7 @@ import {
 } from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
-import * as TWEEN from '@tweenjs/tween.js';
+// import * as TWEEN from '@tweenjs/tween.js';
 
 let scene, camera, controls, targetX;
 const loader = new GLTFLoader();
@@ -162,7 +162,7 @@ function onWindowResize() {
 function animate() {
   requestAnimationFrame(animate);
   controls.update();
-  TWEEN.update();
+  // TWEEN.update();
   renderer.value.render(scene, camera);
   mouseMoveEffect();
 }
@@ -177,10 +177,10 @@ const Add = () => {
       controls.minDistance = 300;
       controls.maxDistance = 300;
       const targetPosition = vector.clone().normalize().multiplyScalar(300);
-      new TWEEN.Tween(camera.position)
-        .to(targetPosition, 1300)
-        .easing(TWEEN.Easing.Quadratic.Out)
-        .start();
+      // new TWEEN.Tween(camera.position)
+      //   .to(targetPosition, 1300)
+      //   .easing(TWEEN.Easing.Quadratic.Out)
+      //   .start();
     } else if (selectIndex.value == 2) {
       const vector = new Vector3(272.200908606223, 107.69011693047166, 191.8580310267151);
       camera.fov = 80;
@@ -188,10 +188,10 @@ const Add = () => {
       controls.minDistance = 350;
       controls.maxDistance = 350;
       const targetPosition = vector.clone().normalize().multiplyScalar(350);
-      new TWEEN.Tween(camera.position)
-        .to(targetPosition, 1400)
-        .easing(TWEEN.Easing.Quadratic.Out)
-        .start();
+      // new TWEEN.Tween(camera.position)
+      //   .to(targetPosition, 1400)
+      //   .easing(TWEEN.Easing.Quadratic.Out)
+      //   .start();
     } else if (selectIndex.value == 3) {
       const vector = new Vector3(259.24754539417444, 235.13877856472016, -0.6819253529141636);
       camera.fov = 80;
@@ -199,10 +199,10 @@ const Add = () => {
       controls.minDistance = 350;
       controls.maxDistance = 350;
       const targetPosition = vector.clone().normalize().multiplyScalar(350);
-      new TWEEN.Tween(camera.position)
-        .to(targetPosition, 1400)
-        .easing(TWEEN.Easing.Quadratic.Out)
-        .start();
+      // new TWEEN.Tween(camera.position)
+      //   .to(targetPosition, 1400)
+      //   .easing(TWEEN.Easing.Quadratic.Out)
+      //   .start();
     } else if (selectIndex.value == 4) {
       const vector = new Vector3(16.982807185505145, 197.36348554409597, -288.54677061784173);
       camera.fov = 90;
@@ -210,10 +210,10 @@ const Add = () => {
       controls.minDistance = 350;
       controls.maxDistance = 350;
       const targetPosition = vector.clone().normalize().multiplyScalar(350);
-      new TWEEN.Tween(camera.position)
-        .to(targetPosition, 1800)
-        .easing(TWEEN.Easing.Quadratic.Out)
-        .start();
+      // new TWEEN.Tween(camera.position)
+      //   .to(targetPosition, 1800)
+      //   .easing(TWEEN.Easing.Quadratic.Out)
+      //   .start();
     }
     scene.children[selectIndex.value - 1].material.opacity = 0.3;
     scene.children[selectIndex.value - 1].material.color.set(0x464646);
@@ -231,10 +231,10 @@ const Subtraction = () => {
       controls.minDistance = 700;
       controls.maxDistance = 700;
       const targetPosition = vector.clone().normalize().multiplyScalar(700);
-      new TWEEN.Tween(camera.position)
-        .to(targetPosition, 1300)
-        .easing(TWEEN.Easing.Quadratic.Out)
-        .start();
+      // new TWEEN.Tween(camera.position)
+      //   .to(targetPosition, 1300)
+      //   .easing(TWEEN.Easing.Quadratic.Out)
+      //   .start();
     } else if (selectIndex.value == 1) {
       const vector = new Vector3(235.71170047212502, 90.02554766529394, -82.41356129520716);
       camera.fov = 80;
@@ -242,10 +242,10 @@ const Subtraction = () => {
       controls.minDistance = 300;
       controls.maxDistance = 300;
       const targetPosition = vector.clone().normalize().multiplyScalar(300);
-      new TWEEN.Tween(camera.position)
-        .to(targetPosition, 1300)
-        .easing(TWEEN.Easing.Quadratic.Out)
-        .start();
+      // new TWEEN.Tween(camera.position)
+      //   .to(targetPosition, 1300)
+      //   .easing(TWEEN.Easing.Quadratic.Out)
+      //   .start();
     } else if (selectIndex.value == 2) {
       const vector = new Vector3(272.200908606223, 107.69011693047166, 191.8580310267151);
       camera.fov = 80;
@@ -253,10 +253,10 @@ const Subtraction = () => {
       controls.minDistance = 350;
       controls.maxDistance = 350;
       const targetPosition = vector.clone().normalize().multiplyScalar(350);
-      new TWEEN.Tween(camera.position)
-        .to(targetPosition, 1400)
-        .easing(TWEEN.Easing.Quadratic.Out)
-        .start();
+      // new TWEEN.Tween(camera.position)
+      //   .to(targetPosition, 1400)
+      //   .easing(TWEEN.Easing.Quadratic.Out)
+      //   .start();
     } else if (selectIndex.value == 3) {
       const vector = new Vector3(259.24754539417444, 235.13877856472016, -0.6819253529141636);
       camera.fov = 80;
@@ -264,10 +264,10 @@ const Subtraction = () => {
       controls.minDistance = 350;
       controls.maxDistance = 350;
       const targetPosition = vector.clone().normalize().multiplyScalar(350);
-      new TWEEN.Tween(camera.position)
-        .to(targetPosition, 1400)
-        .easing(TWEEN.Easing.Quadratic.Out)
-        .start();
+      // new TWEEN.Tween(camera.position)
+      //   .to(targetPosition, 1400)
+      //   .easing(TWEEN.Easing.Quadratic.Out)
+      //   .start();
     } else if (selectIndex.value == 4) {
       const vector = new Vector3(16.982807185505145, 197.36348554409597, -288.54677061784173);
       camera.fov = 90;
@@ -275,10 +275,10 @@ const Subtraction = () => {
       controls.minDistance = 350;
       controls.maxDistance = 350;
       const targetPosition = vector.clone().normalize().multiplyScalar(350);
-      new TWEEN.Tween(camera.position)
-        .to(targetPosition, 1800)
-        .easing(TWEEN.Easing.Quadratic.Out)
-        .start();
+      // new TWEEN.Tween(camera.position)
+      //   .to(targetPosition, 1800)
+      //   .easing(TWEEN.Easing.Quadratic.Out)
+      //   .start();
     }
     scene.children[selectIndex.value + 1].material.opacity = 0.3;
     scene.children[selectIndex.value + 1].material.color.set(0x464646);
