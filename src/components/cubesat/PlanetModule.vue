@@ -38,10 +38,10 @@ onBeforeUnmount(() => {
 function initScene() {
   scene = new Scene();
 
-  let Plant = '/src/assets/three/planet.gltf';
-  if (import.meta.env.MODE != 'development') {
-    Plant = `${import.meta.env.BASE_URL}src/assets/three/planet.gltf`;
-  }
+  let Plant = '/src/assets/three/planet.glb';
+  // if (import.meta.env.MODE != 'development') {
+  //   Plant = `${import.meta.env.BASE_URL}src/assets/three/planet.gltf`;
+  // }
   // loadGLTF
   loader.load(
     // resource URL
