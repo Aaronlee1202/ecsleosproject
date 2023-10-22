@@ -80,10 +80,10 @@ function initScene() {
   //建立時鐘
   clock = new Clock();
   let Plant = '/src/assets/three/planet.glb';
-  // if (import.meta.env.MODE != 'development') {
-  //   Plant = `${import.meta.env.BASE_URL}src/assets/three/planet.gltf`;
-  // }
-  // console.log(`${import.meta.env.BASE_URL}src/assets/three/planet.gltf`);
+  if (import.meta.env.MODE != 'development') {
+    Plant = `${import.meta.env.BASE_URL}src/assets/three/planet.gltf`;
+  }
+  console.log(`${import.meta.env.BASE_URL}src/assets/three/planet.gltf`);
   // loadGLTF
   loader.load(
     // resource URL
