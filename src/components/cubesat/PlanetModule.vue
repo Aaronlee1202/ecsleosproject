@@ -41,7 +41,7 @@ function initScene() {
   // loadGLTF
   loader.load(
     // resource URL
-    'src/assets/three/home/planet01.gltf',
+    '/src/assets/three/home/planet01.gltf',
     function (gltf) {
       sphereMesh = gltf.scene;
       // 調整模型大小

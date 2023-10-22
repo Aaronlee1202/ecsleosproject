@@ -82,7 +82,7 @@ function initScene() {
   // loadGLTF
   loader.load(
     // resource URL
-    'src/assets/three/cubesat/planet.gltf',
+    '/src/assets/three/planet.gltf',
     function (gltf) {
       sphereMesh = gltf.scene;
       // 調整模型大小
