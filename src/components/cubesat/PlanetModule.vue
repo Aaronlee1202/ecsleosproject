@@ -40,7 +40,7 @@ function initScene() {
 
   let Plant = '/src/assets/three/planet.glb';
   if (import.meta.env.MODE != 'development') {
-    Plant = `${import.meta.env.BASE_URL}src/assets/three/planet.gltf`;
+    Plant = `${import.meta.env.BASE_URL}src/assets/three/planet.glb`;
   }
   // loadGLTF
   loader.load(

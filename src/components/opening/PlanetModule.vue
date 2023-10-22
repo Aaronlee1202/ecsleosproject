@@ -81,9 +81,9 @@ function initScene() {
   clock = new Clock();
   let Plant = '/src/assets/three/planet.glb';
   if (import.meta.env.MODE != 'development') {
-    Plant = `${import.meta.env.BASE_URL}src/assets/three/planet.gltf`;
+    Plant = `${import.meta.env.BASE_URL}src/assets/three/planet.glb`;
   }
-  console.log(`${import.meta.env.BASE_URL}src/assets/three/planet.gltf`);
+  console.log(Plant);
   // loadGLTF
   loader.load(
     // resource URL
