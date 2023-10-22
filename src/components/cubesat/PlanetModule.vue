@@ -38,10 +38,14 @@ onBeforeUnmount(() => {
 function initScene() {
   scene = new Scene();
 
+  let Plant = '/src/assets/three/planet.gltf';
+  if (import.meta.env.MODE != 'development') {
+    Plant = `${import.meta.env.BASE_URL}/src/assets/three/planet.gltf`;
+  }
   // loadGLTF
   loader.load(
     // resource URL
-    '/src/assets/three/home/planet01.gltf',
+    Plant,
     function (gltf) {
       sphereMesh = gltf.scene;
       // 調整模型大小
