@@ -53,11 +53,11 @@ onBeforeUnmount(() => {
 function initScene() {
   scene = new Scene();
   // loadGLTF
-  loadGltf('src/assets/three/cubesat/structure/structure.gltf', 50, -190, 0);
-  loadGltf('src/assets/three/cubesat/structure/OBC.gltf', -10, -130, -5);
-  loadGltf('src/assets/three/cubesat/structure/battery.gltf', 25, -80, 0);
-  loadGltf('src/assets/three/cubesat/structure/EPS.gltf', -20, -190, 0);
-  loadGltf('src/assets/three/cubesat/structure/payload.gltf', -20, -190, 0);
+  loadGltf('cubesat/structure/structure.gltf', 50, -190, 0);
+  loadGltf('cubesat/structure/OBC.gltf', -10, -130, -5);
+  loadGltf('cubesat/structure/battery.gltf', 25, -80, 0);
+  loadGltf('cubesat/structure/EPS.gltf', -20, -190, 0);
+  loadGltf('cubesat/structure/payload.gltf', -20, -190, 0);
 
   const Width = window.innerWidth - 90;
   const Height = window.innerHeight;
