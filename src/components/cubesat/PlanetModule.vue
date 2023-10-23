@@ -41,9 +41,9 @@ function initScene() {
   let Plant = 'src/assets/three/planet.gltf';
   if (import.meta.env.MODE != 'development') {
     // Plant = `${import.meta.env.BASE_URL}src/assets/three/planet.glb`;
-    Plant = 'https://aaronlee1202.github.io/ecsleosproject/src/assets/three/planet.gltf';
+    Plant = '/src/assets/three/planet.gltf';
   }
-  console.log(import.meta.env.BASE_URL === 'production' ? '/ecsleosproject/' : '/');
+  console.log(Plant);
   // loadGLTF
   loader.load(
     // resource URL
