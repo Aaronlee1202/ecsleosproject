@@ -79,7 +79,7 @@ function initScene() {
   scene = new Scene();
   //建立時鐘
   clock = new Clock();
-  let Plant = '/planet.glb';
+  let Plant = 'ecsleosproject/planet.glb';
   // if (import.meta.env.MODE != 'development') {
   //   // Plant = `${import.meta.env.BASE_URL}src/assets/three/planet.glb`;
   //   Plant = '/src/assets/three/planet.gltf';
