@@ -80,9 +80,9 @@ function initScene() {
   //建立時鐘
   clock = new Clock();
   let Plant = '/src/assets/three/planet.glb';
-  if (import.meta.env.MODE != 'development') {
-    Plant = `${import.meta.env.BASE_URL}src/assets/three/planet.glb`;
-  }
+  // if (import.meta.env.MODE != 'development') {
+  //   Plant = `${import.meta.env.BASE_URL}src/assets/three/planet.glb`;
+  // }
   console.log(Plant);
   // loadGLTF
   loader.load(

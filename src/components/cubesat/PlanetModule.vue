@@ -39,9 +39,10 @@ function initScene() {
   scene = new Scene();
 
   let Plant = '/src/assets/three/planet.glb';
-  if (import.meta.env.MODE != 'development') {
-    Plant = `${import.meta.env.BASE_URL}src/assets/three/planet.glb`;
-  }
+  // if (import.meta.env.MODE != 'development') {
+  //   Plant = `${import.meta.env.BASE_URL}src/assets/three/planet.glb`;
+  // }
+  console.log(import.meta.env.BASE_URL === 'production' ? '/ecsleosproject/' : '/');
   // loadGLTF
   loader.load(
     // resource URL
