@@ -19,7 +19,7 @@ const anLottieHover = ref(null);
 const planetMoveEffectSwitch = ref(true);
 const subjectButton = ref(false);
 const slideIndex = ref(0);
-const satelliteName = ['LEO', 'MEO', 'HEO'];
+const satelliteName = ['LEO', 'MEO', 'GEO'];
 const distanceInfo = ['離地 300-1500km', '離地 2000-30000km', '離地大於36000km'];
 
 const plusDivs = () => {

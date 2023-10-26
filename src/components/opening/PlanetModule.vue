@@ -75,7 +75,7 @@ onBeforeUnmount(() => {
 });
 //建立場景
 function initScene() {
-  console.log(import.meta.env);
+  // console.log(import.meta.env);
   scene = new Scene();
   //建立時鐘
   clock = new Clock();
