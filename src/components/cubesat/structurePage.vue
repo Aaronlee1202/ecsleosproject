@@ -36,12 +36,15 @@ const cameraPosition = reactive({
   z: 920
 });
 
+const interval = ref(null);
+
 onMounted(() => {
   initScene();
 });
 
 onBeforeUnmount(() => {
   console.log('onBeforeUnmount');
+  clearInterval(interval.value);
   renderer.value.dispose();
   renderer.value.renderLists.dispose();
   // 在組件卸載前移除事件監聽器，以防止內存洩漏
@@ -167,6 +170,40 @@ function animate() {
   mouseMoveEffect();
 }
 
+const effectBtn = () => {
+  console.log(interval.value);
+  if (interval.value == null) {
+    console.log('Effect Start!');
+    interval.value = setInterval(() => {
+      demoEffect();
+    }, 4000 * 1);
+  } else {
+    console.log('Effect Stop!');
+    clearInterval(interval.value);
+    interval.value = null;
+  }
+};
+
+let index = 0;
+const demoEffect = () => {
+  if (index == 0) {
+    if (selectIndex.value == 4) {
+      index = 4;
+    }
+    if (selectIndex.value < 4) {
+      Add();
+    }
+  }
+  if (index == 4) {
+    if (selectIndex.value == 0) {
+      index = 0;
+    }
+    if (selectIndex.value > 0) {
+      Subtraction();
+    }
+  }
+};
+
 const Add = () => {
   if (selectIndex.value < 4) {
     selectIndex.value++;
@@ -291,6 +328,7 @@ const Subtraction = () => {
 <template>
   <div class="container-custom">
     <div ref="structureModule" id="structureModule"></div>
+    <div class="effect-btn" @click="effectBtn">stop/start</div>
     <div class="swiper-block">
       <div
         class="btn subtraction-btn"
@@ -403,6 +441,15 @@ const Subtraction = () => {
   left: 50%;
   transform: translateX(-50%);
   z-index: -1;
+}
+.effect-btn {
+  position: absolute;
+  bottom: 0;
+  cursor: pointer;
+  color: #00000000;
+  &:hover {
+    color: rgb(249, 255, 255);
+  }
 }
 .container-custom {
   display: grid;
